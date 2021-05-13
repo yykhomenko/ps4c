@@ -146,22 +146,67 @@ func main() {
 	// D-pad down
 	// EventDPadDownPress
 	// EventDPadDownRelease
+	c.On(gods4.EventDPadDownPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadDown")
+		return nil
+	})
+
+	c.On(gods4.EventDPadDownRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadDown")
+		return nil
+	})
 
 	// D-pad left
 	// EventDPadLeftPress
 	// EventDPadLeftRelease
+	c.On(gods4.EventDPadLeftPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadLeft")
+		return nil
+	})
+
+	c.On(gods4.EventDPadLeftRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadLeft")
+		return nil
+	})
 
 	// D-pad right
 	// EventDPadRightPress
 	// EventDPadRightRelease
+	c.On(gods4.EventDPadRightPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadRight")
+		return nil
+	})
+
+	c.On(gods4.EventDPadRightRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadRight")
+		return nil
+	})
 
 	// Share
 	// EventSharePress
 	// EventShareRelease
+	c.On(gods4.EventSharePress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "Share")
+		return nil
+	})
+
+	c.On(gods4.EventShareRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Share")
+		return nil
+	})
 
 	// Options
 	// EventOptionsPress
 	// EventOptionsRelease
+	c.On(gods4.EventOptionsPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "Options")
+		return nil
+	})
+
+	c.On(gods4.EventOptionsRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Options")
+		return nil
+	})
 
 	// Touchpad
 	// EventTouchpadSwipe
@@ -171,6 +216,15 @@ func main() {
 	// PS
 	// EventPSPress
 	// EventPSRelease
+	c.On(gods4.EventPSPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "PS")
+		return nil
+	})
+
+	c.On(gods4.EventPSRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "PS")
+		return nil
+	})
 
 	// Left stick
 	// EventLeftStickMove
