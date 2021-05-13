@@ -212,6 +212,21 @@ func main() {
 	// EventTouchpadSwipe
 	// EventTouchpadPress
 	// EventTouchpadRelease
+	c.On(gods4.EventTouchpadSwipe, func(data interface{}) error {
+		t := data.(gods4.Touchpad)
+		log.Printf("* Controller #1 | %-10s | press: %v, swipe: %v\n", "Touchpad", t.Press, t.Swipe)
+		return nil
+	})
+
+	c.On(gods4.EventTouchpadPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "Touchpad")
+		return nil
+	})
+
+	c.On(gods4.EventTouchpadRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Touchpad")
+		return nil
+	})
 
 	// PS
 	// EventPSPress
