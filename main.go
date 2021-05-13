@@ -39,146 +39,20 @@ func main() {
 	})
 
 	// Circle
-	// EventCirclePress   Event = "circle.press"
-	// EventCircleRelease Event = "circle.release"
-	//
-	// // Square
-	// EventSquarePress   Event = "square.press"
-	// EventSquareRelease Event = "square.release"
-	//
-	// // Triangle
-	// EventTrianglePress   Event = "triangle.press"
-	// EventTriangleRelease Event = "triangle.release"
-	//
-	// // L1
-	// EventL1Press   Event = "l1.press"
-	// EventL1Release Event = "l1.release"
-	//
-	// // L2
-	// EventL2Press   Event = "l2.press"
-	// EventL2Release Event = "l2.release"
-	//
-	// // L3
-	// EventL3Press   Event = "l3.press"
-	// EventL3Release Event = "l3.release"
-	//
-	// // R1
-	// EventR1Press   Event = "r1.press"
-	// EventR1Release Event = "r1.release"
-	//
-	// // R2
-	// EventR2Press   Event = "r2.press"
-	// EventR2Release Event = "r2.release"
-	//
-	// // R3
-	// EventR3Press   Event = "r3.press"
-	// EventR3Release Event = "r3.release"
-	//
-	// // D-pad up
-	// EventDPadUpPress   Event = "dpad_up.press"
-	// EventDPadUpRelease Event = "dpad_up.release"
-	//
-	// // D-pad down
-	// EventDPadDownPress   Event = "dpad_down.press"
-	// EventDPadDownRelease Event = "dpad_down.release"
-	//
-	// // D-pad left
-	// EventDPadLeftPress   Event = "dpad_left.press"
-	// EventDPadLeftRelease Event = "dpad_left.release"
-	//
-	// // D-pad right
-	// EventDPadRightPress   Event = "dpad_right.press"
-	// EventDPadRightRelease Event = "dpad_right.release"
-	//
-	// // Share
-	// EventSharePress   Event = "share.press"
-	// EventShareRelease Event = "share.release"
-	//
-	// // Options
-	// EventOptionsPress   Event = "options.press"
-	// EventOptionsRelease Event = "options.release"
-	//
-	// // Touchpad
-	// EventTouchpadSwipe   Event = "touchpad.swipe"
-	// EventTouchpadPress   Event = "touchpad.press"
-	// EventTouchpadRelease Event = "touchpad.release"
-	//
-	// // PS
-	// EventPSPress   Event = "ps.press"
-	// EventPSRelease Event = "ps.release"
-	//
-	// // Left stick
-	// EventLeftStickMove Event = "left_stick.move"
-	//
-	// // Right stick
-	// EventRightStickMove Event = "right_stick.move"
-	//
-	// // Accelerometer
-	// EventAccelerometerUpdate Event = "accelerometer.update"
-	//
-	// // Gyroscope
-	// EventGyroscopeUpdate Event = "gyroscope.update"
-	//
-	// // Battery
-	// EventBatteryUpdate Event = "battery.update"
+	// EventCirclePress
+	// EventCircleRelease
 
-	c.On(gods4.EventBatteryUpdate, func(data interface{}) error {
-		battery := data.(gods4.Battery)
-		log.Printf("* Controller #1 | %-10s | capacity: %v%%, charging: %v, cable: %v\n", "Battery",
-			battery.Capacity,
-			battery.IsCharging,
-			battery.IsCableConnected,
-		)
-		return nil
-	})
+	// Square
+	// EventSquarePress
+	// EventSquareRelease
 
-	// c.On(gods4.EventGyroscopeUpdate, func(data interface{}) error {
-	// 	g := data.(gods4.Gyroscope)
-	// 	log.Printf("* Controller #1 | %-10s | roll: %v, yaw: %v, pitch: %v\n", "Gyroscope", g.Roll, g.Yaw, g.Pitch)
-	// 	return nil
-	// })
+	// Triangle
+	// EventTrianglePress
+	// EventTriangleRelease
 
-	// c.On(gods4.EventAccelerometerUpdate, func(data interface{}) error {
-	// 	a := data.(gods4.Accelerometer)
-	// 	log.Printf("* Controller #1 | %-10s | x: %v, y: %v, z: %v\n", "Accelerometer", a.X, a.Y, a.Z)
-	// 	return nil
-	// })
-
-	// L1 =======================================================================
-	L1(c)
-	// ==========================================================================
-
-	// L2 =======================================================================
-	c.On(gods4.EventL2Press, func(data interface{}) error {
-		log.Printf("* Controller #1 | %-10s | state: press\n", "L2")
-		return nil
-	})
-
-	c.On(gods4.EventL2Release, func(data interface{}) error {
-		log.Printf("* Controller #1 | %-10s | state: release\n", "L2")
-		return nil
-	})
-	// ==========================================================================
-
-	c.On(gods4.EventLeftStickMove, func(data interface{}) error {
-		stick := data.(gods4.Stick)
-		log.Printf("* Controller #1 | %-10s | x: %v, y: %v\n", "RightStick", stick.X, stick.Y)
-		return nil
-	})
-
-	c.On(gods4.EventLeftStickMove, func(data interface{}) error {
-		stick := data.(gods4.Stick)
-		log.Printf("* Controller #1 | %-10s | x: %v, y: %v\n", "RightStick", stick.X, stick.Y)
-		return nil
-	})
-
-	err = c.Listen()
-	if err != nil {
-		panic(err)
-	}
-}
-
-func L1(c *gods4.Controller) {
+	// L1
+	// EventL1Press
+	// EventL1Release
 	c.On(gods4.EventL1Press, func(data interface{}) error {
 		log.Printf("* Controller #1 | %-10s | state: press\n", "L1")
 		return nil
@@ -188,6 +62,164 @@ func L1(c *gods4.Controller) {
 		log.Printf("* Controller #1 | %-10s | state: release\n", "L1")
 		return nil
 	})
+
+	// L2
+	// EventL2Press
+	// EventL2Release
+	c.On(gods4.EventL2Press, func(data interface{}) error {
+		b := data.(byte)
+		log.Printf("* Controller #1 | %-10s | state: press, level: %v\n", "L2", b)
+		return nil
+	})
+
+	c.On(gods4.EventL2Release, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "L2")
+		return nil
+	})
+
+	// L3
+	// EventL3Press
+	// EventL3Release
+	c.On(gods4.EventL3Press, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "L3")
+		return nil
+	})
+
+	c.On(gods4.EventL3Release, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "L3")
+		return nil
+	})
+
+	// R1
+	// EventR1Press
+	// EventR1Release
+	c.On(gods4.EventR1Press, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "R1")
+		return nil
+	})
+
+	c.On(gods4.EventR1Release, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "R1")
+		return nil
+	})
+
+	// R2
+	// EventR2Press
+	// EventR2Release
+	c.On(gods4.EventR2Press, func(data interface{}) error {
+		b := data.(byte)
+		log.Printf("* Controller #1 | %-10s | state: press, level: %v\n", "R2", b)
+		return nil
+	})
+
+	c.On(gods4.EventR2Release, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "R2")
+		return nil
+	})
+
+	// R3
+	// EventR3Press
+	// EventR3Release
+	c.On(gods4.EventR3Press, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "R3")
+		return nil
+	})
+
+	c.On(gods4.EventR3Release, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "R3")
+		return nil
+	})
+
+	// D-pad up
+	// EventDPadUpPress
+	// EventDPadUpRelease
+	c.On(gods4.EventDPadUpPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadUp")
+		return nil
+	})
+
+	c.On(gods4.EventDPadUpRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadUp")
+		return nil
+	})
+
+	// D-pad down
+	// EventDPadDownPress
+	// EventDPadDownRelease
+
+	// D-pad left
+	// EventDPadLeftPress
+	// EventDPadLeftRelease
+
+	// D-pad right
+	// EventDPadRightPress
+	// EventDPadRightRelease
+
+	// Share
+	// EventSharePress
+	// EventShareRelease
+
+	// Options
+	// EventOptionsPress
+	// EventOptionsRelease
+
+	// Touchpad
+	// EventTouchpadSwipe
+	// EventTouchpadPress
+	// EventTouchpadRelease
+
+	// PS
+	// EventPSPress
+	// EventPSRelease
+
+	// Left stick
+	// EventLeftStickMove
+	c.On(gods4.EventLeftStickMove, func(data interface{}) error {
+		stick := data.(gods4.Stick)
+		log.Printf("* Controller #1 | %-10s | x: %v, y: %v\n", "LeftStick", stick.X, stick.Y)
+		return nil
+	})
+
+	// // Right stick
+	// EventRightStickMove
+	c.On(gods4.EventRightStickMove, func(data interface{}) error {
+		stick := data.(gods4.Stick)
+		log.Printf("* Controller #1 | %-10s | x: %v, y: %v\n", "RightStick", stick.X, stick.Y)
+		return nil
+	})
+
+	// Accelerometer
+	// EventAccelerometerUpdate
+	// c.On(gods4.EventAccelerometerUpdate, func(data interface{}) error {
+	// 	a := data.(gods4.Accelerometer)
+	// 	log.Printf("* Controller #1 | %-10s | x: %v, y: %v, z: %v\n", "Accelerometer", a.X, a.Y, a.Z)
+	// 	return nil
+	// })
+
+	// Gyroscope
+	// EventGyroscopeUpdate
+	// c.On(gods4.EventGyroscopeUpdate, func(data interface{}) error {
+	// 	g := data.(gods4.Gyroscope)
+	// 	log.Printf("* Controller #1 | %-10s | roll: %v, yaw: %v, pitch: %v\n", "Gyroscope", g.Roll, g.Yaw, g.Pitch)
+	// 	return nil
+	// })
+
+	// Battery
+	// EventBatteryUpdate
+	c.On(gods4.EventBatteryUpdate, func(data interface{}) error {
+		b := data.(gods4.Battery)
+		log.Printf("* Controller #1 | %-10s | capacity: %v%%, charging: %v, cable: %v\n", "Battery",
+			b.Capacity,
+			b.IsCharging,
+			b.IsCableConnected,
+		)
+		return nil
+	})
+
+	err = c.Listen()
+	if err != nil {
+		panic(err)
+	}
 }
 
 func onProgramTerminate(c *gods4.Controller) {
