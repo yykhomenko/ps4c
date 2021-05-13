@@ -27,39 +27,38 @@ func main() {
 
 	c.On(gods4.EventBatteryUpdate, func(data interface{}) error {
 		battery := data.(gods4.Battery)
-		log.Printf("* Controller #1 | %-10s | capacity: %v%%, charging: %v, cable: %v\n",
-			"Battery",
+		log.Printf("* Controller #1 | %-10s | capacity: %v%%, charging: %v, cable: %v\n", "Battery",
 			battery.Capacity,
 			battery.IsCharging,
 			battery.IsCableConnected,
 		)
+		return nil
+	})
 
+	c.On(gods4.EventL1Press, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "Cross")
 		return nil
 	})
 
 	c.On(gods4.EventCrossPress, func(data interface{}) error {
 		log.Printf("* Controller #1 | %-10s | state: press\n", "Cross")
-
 		return nil
 	})
 
 	c.On(gods4.EventCrossRelease, func(data interface{}) error {
 		log.Printf("* Controller #1 | %-10s | state: release\n", "Cross")
-
 		return nil
 	})
 
 	c.On(gods4.EventLeftStickMove, func(data interface{}) error {
 		stick := data.(gods4.Stick)
 		log.Printf("* Controller #1 | %-10s | x: %v, y: %v\n", "RightStick", stick.X, stick.Y)
-
 		return nil
 	})
 
 	c.On(gods4.EventLeftStickMove, func(data interface{}) error {
 		stick := data.(gods4.Stick)
 		log.Printf("* Controller #1 | %-10s | x: %v, y: %v\n", "RightStick", stick.X, stick.Y)
-
 		return nil
 	})
 
@@ -69,7 +68,6 @@ func main() {
 	}
 }
 
-// Disconnect controller when a program is terminated
 func onProgramTerminate(c *gods4.Controller) {
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
