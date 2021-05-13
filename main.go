@@ -16,9 +16,9 @@ func main() {
 	}
 
 	c := cs[0]
-	err := c.Connect()
-	if err != nil {
-		panic(err)
+
+	if err := c.Connect(); err != nil {
+		log.Fatal(err)
 	}
 
 	log.Printf("* Controller #1 | %-10s | name: %s, connection: %s\n", "Connect", c, c.ConnectionType())
@@ -41,14 +41,41 @@ func main() {
 	// Circle
 	// EventCirclePress
 	// EventCircleRelease
+	c.On(gods4.EventCirclePress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "Circle")
+		return nil
+	})
+
+	c.On(gods4.EventCircleRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Circle")
+		return nil
+	})
 
 	// Square
 	// EventSquarePress
 	// EventSquareRelease
+	c.On(gods4.EventSquarePress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "Square")
+		return nil
+	})
+
+	c.On(gods4.EventSquareRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Square")
+		return nil
+	})
 
 	// Triangle
 	// EventTrianglePress
 	// EventTriangleRelease
+	c.On(gods4.EventTrianglePress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "Triangle")
+		return nil
+	})
+
+	c.On(gods4.EventTriangleRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Triangle")
+		return nil
+	})
 
 	// L1
 	// EventL1Press
@@ -285,10 +312,7 @@ func main() {
 		return nil
 	})
 
-	err = c.Listen()
-	if err != nil {
-		panic(err)
-	}
+	log.Fatal(c.Listen())
 }
 
 func onProgramTerminate(c *gods4.Controller) {
