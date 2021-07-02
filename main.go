@@ -23,7 +23,7 @@ func main() {
 
 	log.Printf("* Controller #1 | %-10s | name: %s, connection: %s\n", "Connect", c, c.ConnectionType())
 
-	onProgramTerminate(c)
+	onExit(c)
 
 	// Cross
 	// EventCrossPress
@@ -276,7 +276,7 @@ func main() {
 		return nil
 	})
 
-	// // Right stick
+	// Right stick
 	// EventRightStickMove
 	c.On(gods4.EventRightStickMove, func(data interface{}) error {
 		stick := data.(gods4.Stick)
@@ -315,7 +315,7 @@ func main() {
 	log.Fatal(c.Listen())
 }
 
-func onProgramTerminate(c *gods4.Controller) {
+func onExit(c *gods4.Controller) {
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
