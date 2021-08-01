@@ -26,14 +26,30 @@ func main() {
 
 	log.Printf("* Controller #1 | %-10s | name: %s, connection: %s\n", "Connect", c, c.ConnectionType())
 
-	onExit(c)
-
-	origin := "http://" + IP + ":80/"
+	origin := "http://" + IP + "/"
 	url := "ws://" + IP + ":80/ws"
 	ws, err := websocket.Dial(url, "", origin)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	signals := make(chan os.Signal, 1)
+	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		<-signals
+
+		err := ws.Close()
+		if err != nil {
+			panic(err)
+		}
+		log.Printf("* IP %s | %-10s | bye!\n", url, "Disconnect")
+
+		err = c.Disconnect()
+		if err != nil {
+			panic(err)
+		}
+		log.Printf("* Controller #1 | %-10s | bye!\n", "Disconnect")
+	}()
 
 	// Cross
 	// EventCrossPress
@@ -65,20 +81,7 @@ func main() {
 	log.Fatal(c.Listen())
 }
 
-func onExit(c *gods4.Controller) {
-	signals := make(chan os.Signal, 1)
-	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
-	go func() {
-		<-signals
-		err := c.Disconnect()
-		if err != nil {
-			panic(err)
-		}
-		log.Printf("* Controller #1 | %-10s | bye!\n", "Disconnect")
-	}()
-}
-
-func toggle(ws *websocket.Conn) {
+func toggle(ws *websocket.Conn) error {
 	if _, err := ws.Write([]byte("toggle")); err != nil {
 		log.Fatal(err)
 	}
@@ -87,6 +90,8 @@ func toggle(ws *websocket.Conn) {
 	var err error
 	if n, err = ws.Read(msg); err != nil {
 		log.Fatal(err)
+		return err
 	}
 	log.Printf("Received: %s.\n", msg[:n])
+	return nil
 }
