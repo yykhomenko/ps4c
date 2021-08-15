@@ -33,6 +33,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	log.Printf("Connected to %s", url)
+
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
