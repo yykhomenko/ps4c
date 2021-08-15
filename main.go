@@ -58,13 +58,13 @@ func main() {
 	// EventCrossRelease
 	c.On(gods4.EventCrossPress, func(data interface{}) error {
 		log.Printf("* Controller #1 | %-10s | state: press\n", "Cross")
-		toggle(ws)
+		send(ws, "toggle")
 		return nil
 	})
 
 	c.On(gods4.EventCrossRelease, func(data interface{}) error {
 		log.Printf("* Controller #1 | %-10s | state: release\n", "Cross")
-		toggle(ws)
+		send(ws, "toggle")
 		return nil
 	})
 
@@ -83,17 +83,17 @@ func main() {
 	log.Fatal(c.Listen())
 }
 
-func toggle(ws *websocket.Conn) error {
-	if _, err := ws.Write([]byte("toggle")); err != nil {
+func send(ws *websocket.Conn, msg string) error {
+	if _, err := ws.Write([]byte(msg)); err != nil {
 		log.Fatal(err)
 	}
-	var msg = make([]byte, 512)
+	var buf = make([]byte, 512)
 	var n int
 	var err error
-	if n, err = ws.Read(msg); err != nil {
+	if n, err = ws.Read(buf); err != nil {
 		log.Fatal(err)
 		return err
 	}
-	log.Printf("Received: %s.\n", msg[:n])
+	log.Printf("Received: %s.\n", buf[:n])
 	return nil
 }
