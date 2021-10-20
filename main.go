@@ -53,18 +53,58 @@ func main() {
 		log.Printf("* Controller #1 | %-10s | bye!\n", "Disconnect")
 	}()
 
-	// Cross
-	// EventCrossPress
-	// EventCrossRelease
 	c.On(gods4.EventCrossPress, func(data interface{}) error {
-		log.Printf("* Controller #1 | %-10s | state: press\n", "Cross")
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Cross")
+		send(ws, "toggle")
+		return nil
+	})
+	c.On(gods4.EventCrossRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "Cross")
 		send(ws, "toggle")
 		return nil
 	})
 
-	c.On(gods4.EventCrossRelease, func(data interface{}) error {
-		log.Printf("* Controller #1 | %-10s | state: release\n", "Cross")
-		send(ws, "toggle")
+	c.On(gods4.EventDPadUpPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadUp")
+		send(ws, "r1On")
+		return nil
+	})
+	c.On(gods4.EventDPadUpRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadUp")
+		send(ws, "r1Off")
+		return nil
+	})
+
+	c.On(gods4.EventDPadRightPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadUp")
+		send(ws, "r2On")
+		return nil
+	})
+	c.On(gods4.EventDPadRightRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadUp")
+		send(ws, "r2Off")
+		return nil
+	})
+
+	c.On(gods4.EventDPadDownPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadUp")
+		send(ws, "r3On")
+		return nil
+	})
+	c.On(gods4.EventDPadDownRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadUp")
+		send(ws, "r3Off")
+		return nil
+	})
+
+	c.On(gods4.EventDPadLeftPress, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: press\n", "DPadUp")
+		send(ws, "r4On")
+		return nil
+	})
+	c.On(gods4.EventDPadLeftRelease, func(data interface{}) error {
+		log.Printf("* Controller #1 | %-10s | state: release\n", "DPadUp")
+		send(ws, "r4Off")
 		return nil
 	})
 
